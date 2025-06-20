@@ -72,33 +72,33 @@ if (is_array($image) && isset($image['url'])) {
 
 
             </div>
-            
+
             </div>
-			 <?php if (have_rows('features_blocks')): ?>
-				<div class="features-wrap">
-					<div class="features-blocks">
-                    <?php while (have_rows('features_blocks')): the_row();
-                        $icon = get_sub_field('icon');
-                        $feature_text = get_sub_field('feature_text');
-                        $feature_link = get_sub_field('feature_link');
-                    ?>
-                        <div class="features-block">
-                            <?php if ($icon && is_array($icon) && isset($icon['url'])): ?>
-                                <div class="features">
-                                    <img src="<?php echo esc_url($icon['url']); ?>" alt="<?php echo esc_html($feature_text); ?>">
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($feature_text): ?>
-                                <div class="features-text">
-                                    <?php echo esc_html($feature_text); ?>
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($feature_link): ?>
-                                <a href="<?php echo esc_url($feature_link); ?>" class="features-link"></a>
-                            <?php endif; ?>
-                        </div>
-                    <?php endwhile; ?>
+            <?php if (have_rows('features_blocks')): ?>
+                <div class="features-wrap">
+                    <div class="features-blocks">
+                        <?php while (have_rows('features_blocks')): the_row();
+                            $icon = get_sub_field('icon');
+                            $feature_text = get_sub_field('feature_text');
+                            $feature_link = get_sub_field('feature_link');
+                        ?>
+                            <a href="<?php echo esc_url($feature_link); ?>" class="features-block">
+                                <?php if ($icon && is_array($icon) && isset($icon['url'])): ?>
+                                    <div class="features">
+                                        <img src="<?php echo esc_url($icon['url']); ?>" alt="<?php echo esc_html($feature_text); ?>">
+                                    </div>
+                                <?php endif; ?>
+                                <?php if ($feature_text): ?>
+                                    <div class="features-text">
+                                        <?php echo esc_html($feature_text); ?>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if ($feature_link): ?>
+
+                                <?php endif; ?>
+                            </a>
+                        <?php endwhile; ?>
+                    </div>
                 </div>
-				</div>
             <?php endif; ?>
 </section>
