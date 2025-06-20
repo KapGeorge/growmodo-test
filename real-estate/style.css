@@ -1,0 +1,81 @@
+/*
+Theme Name: Real estate Custom Theme
+Author: Georgii Kapanadze
+Description: Custom theme for WordPress Real Estate
+Version: 1.0
+*/
+
+/* Normalize CSS */
+*,
+a,
+abbr,
+acronym,
+address,
+applet,
+b,
+big,
+body,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+dfn,
+div,
+dl,
+dt,
+em,
+fieldset,
+font,
+form,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+object,
+q,
+s,
+samp,
+small,
+span,
+strike,
+strong,
+sub,
+sup,
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr,
+tt,
+u,
+var,
+select,
+input,
+textarea,
+:focus,
+::-moz-focus-inner {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 0;
+  font-family: "Urbanist", sans-serif;
+  font-style: normal;
+  font-optical-sizing: auto;
+  background: #141414;
+}
