@@ -46,36 +46,32 @@ add_filter('file_is_displayable_image', 'webp_is_displayable', 10, 2);
 
 add_filter('upload_mimes', 'svg_upload_allow');
 
-# Add SVG format in approved types
+// Add SVG format to allowed upload types
 function svg_upload_allow($mimes)
 {
-    $mimes['svg'] = 'image/svg+xml';
-
+    $mimes['svg'] = 'image/svg+xml'; // Allow SVG uploads
     return $mimes;
 }
 
 add_filter('wp_check_filetype_and_ext', 'fix_svg_mime_type', 10, 5);
 
-# fixing MIME types for SVG.
+// Fix MIME types for SVG uploads
 function fix_svg_mime_type($data, $file, $filename, $mimes, $real_mime = '')
 {
-
-    // WP 5.1 +
-    if (version_compare($GLOBALS['wp_version'], '5.1.0', '>='))
+    // For WP 5.1+ check real MIME type, otherwise check file extension
+    if (version_compare($GLOBALS['wp_version'], '5.1.0', '>=')) {
         $dosvg = in_array($real_mime, ['image/svg', 'image/svg+xml']);
-    else
+    } else {
         $dosvg = ('.svg' === strtolower(substr($filename, -4)));
+    }
 
-    
     if ($dosvg) {
-
-       
+        // Allow only admins to upload SVG
         if (current_user_can('manage_options')) {
 
             $data['ext'] = 'svg';
             $data['type'] = 'image/svg+xml';
-        }  
-        else {
+        } else {
             $data['ext'] = false;
             $data['type'] = false;
         }
@@ -87,7 +83,7 @@ function fix_svg_mime_type($data, $file, $filename, $mimes, $real_mime = '')
 
 add_filter('wp_prepare_attachment_for_js', 'show_svg_in_media_library');
 
-# Create data for SVG.
+// Show SVG preview in the media library
 function show_svg_in_media_library($response)
 {
 
@@ -101,3 +97,24 @@ function show_svg_in_media_library($response)
 
     return $response;
 }
+
+//Registrated block for ACF
+if( function_exists('acf_register_block_type') ) {
+    function register_acf_hero_section_block() {
+        acf_register_block_type(array(
+            'name'              => 'hero-section',
+            'title'             => __('Hero Section', 'real-estate'),
+            'description'       => __('Hero section block.'),
+            'render_template'   => 'template-parts/blocks/hero-section.php',
+            'category'          => 'layout',
+            'icon'              => 'cover-image',
+            'keywords'          => array( 'hero', 'banner', 'section' ),
+            'mode'              => 'edit',
+            'supports'          => array(
+                'align' => false,
+            ),
+        ));
+    }
+    add_action('acf/init', 'register_acf_hero_section_block');
+}
+
